@@ -1,0 +1,12 @@
+{
+    "verbose": true,
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "ext": "js",
+    "execMap": {
+        "js": "node --experimental-json-modules --experimental-specifier-resolution=node"
+    },
+    "delay": 10
+  }
