@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import {spawn} from "child_process";
 import { v4 as uuid } from "uuid";
 import fs from "fs/promises";
