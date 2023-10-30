@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; box-sizing: border-box;">
+    <form id="form" style="display: flex; flex-direction: column; width: 300px; gap: 15px;">
+        <input type="file" name="video" id="" max="1">
+        <input type="file" name="audio" id="" max="1">
+        <button>Gerar</button>
+    </form>
+    <video id="video" autoplay style="display: flex; width: 300px; height: 300px;"></video>
+    <script>
+        const formEl = document.getElementById("form");
+        const videoEl = document.getElementById("video");
+        
+        async function submit (e)
+        {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            const result = await fetch("http://localhost:3000/merge", { 
+                method: "POST", 
+                body: formData 
+            }).then((res) => res.arrayBuffer());
+            const blob = new Blob([result], { type: "video/mp4"});
+            const url = URL.createObjectURL(blob);
+            console.log("Buffer", result);
+
+            videoEl.src = url;
+            videoEl.play();
+        }
+        formEl.onsubmit = submit;
+
+    </script>
+</body>
+</html>
